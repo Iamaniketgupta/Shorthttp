@@ -226,3 +226,14 @@ nav {
         font-size: 9px;
     }
 }
+
+.copiesmsg{
+    position: absolute;
+    z-index: 2;
+    margin: 0 2rem;
+    padding:5px 10px;
+    background-color: green;
+    border-radius: 12px;
+    transition: all 1s;
+    display: none;
+}
