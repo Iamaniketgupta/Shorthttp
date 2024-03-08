@@ -1,0 +1,19 @@
+<%-include('header.ejs')  %>
+
+<div class="form-wrapper">
+    <div class="form-inner-wrapper">
+        <h2>Sign Up</h2>
+        <form action="/url/signup" method="post">
+
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Aniket">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="email">
+            <label for="pass">Password</label>
+            <input type="text" name="password" id="pass" placeholder="password">
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>
