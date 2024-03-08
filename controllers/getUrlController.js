@@ -3,12 +3,14 @@ const URL = require("../models/urlSchema")
 const getAllUrls = async (req, res) => {
 
     try {
-        const result = await URL.find({});
-        console.log(result);
-        res.render('home.ejs', { result });
+        
+        if(!req.user) res.redirect("/url/login");
+        const user =req.user;
+        const result = await URL.find({createdBy:user._id});
+        res.render('dashboard.ejs', { result });
     }
     catch (err) {
-        res.render("home.ejs");
+       res.send({err});
     }
 
 }
