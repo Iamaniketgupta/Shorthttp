@@ -4,6 +4,7 @@ const URL = require("../models/urlSchema");
 const generateNewShortUrl = async (req, res) => {
     try {
         const {url} = req.body;
+        console.log(req.user)
         if (!url) {
             return res.status(400).json({ error: "URL is required" });
         }
@@ -13,10 +14,11 @@ const generateNewShortUrl = async (req, res) => {
         await URL.create({
             shortId: shortID,
             redirectUrl: url,
+            createdBy:req.user?._id,
             visitedHistory: [],
         });
 
-         res.redirect('/');
+         res.redirect('/url/dashboard');
 
     } catch (error) {
          console.error("Error generating short URL:", error);
