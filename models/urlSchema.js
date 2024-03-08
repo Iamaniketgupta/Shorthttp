@@ -1,4 +1,5 @@
-const {Schema,model} = require("mongoose");
+const {Schema,model, default: mongoose} = require("mongoose");
+const user = require("./userSchema");
 
 const urlSchema = new Schema({
     shortId: {
@@ -9,6 +10,11 @@ const urlSchema = new Schema({
     redirectUrl: {
         type: String,
         required: true,
+    },
+    createdBy:{
+            type: mongoose.SchemaTypes.ObjectId,
+            ref:'user',
+            required:true,
     },
     visitHistory: [{
         timestamp:
