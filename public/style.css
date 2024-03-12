@@ -193,6 +193,7 @@ nav {
     display: flex;
     justify-content: space-between;
     max-width: 1000px;
+    align-items: center;
     
 }
 .col {
@@ -204,6 +205,7 @@ nav {
     height: 100%;
     height: fit-content;
     overflow-x: scroll;
+    margin: auto 15px;
 }
 .col span{
     min-width: fit-content;
@@ -214,8 +216,10 @@ nav {
     display: none;
 }
 .del-btn{
-    min-width: 25px;
+    min-width: fit-content;
+    padding: 3px 5px;
     min-height: 25px;
+    margin: 0 5px;
 }
 .footer-wrapper {
     width: 100%;
