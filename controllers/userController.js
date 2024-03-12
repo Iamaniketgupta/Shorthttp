@@ -5,15 +5,17 @@ const { setUser } = require("../util/auth");
 const handleLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
-        
+
         if (!(email && password))
             throw new Error("All fields are required");
 
         const userDetails = await user.findOne({ email: email })
 
-        if (!userDetails)
+        if (!userDetails) {
+            res.redirect('/url/signup');
             throw new Error("User does not exist");
 
+        }
         else {
 
             const salt = userDetails.salt;
@@ -52,9 +54,11 @@ const handleSignup = async (req, res) => {
 
         if (!userDetails) {
             throw new Error("Error while creating user ");
+            
         }
         else {
-            res.redirect('/')
+            // res.send(`<script>alert("Signup Successfull. Please login")</script>`)
+            res.redirect('/login');
         }
 
     } catch (error) {
@@ -63,4 +67,13 @@ const handleSignup = async (req, res) => {
 
 }
 
-module.exports = { handleLogin, handleSignup };
+const options = {
+    httpOnly: true
+}
+
+const handleLogOut = (req, res) => {
+    res.clearCookie("authId", options);
+    res.redirect("/");
+}
+
+module.exports = { handleLogin, handleSignup, handleLogOut };
