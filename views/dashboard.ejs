@@ -47,21 +47,24 @@
                 
                 <% result?.forEach((item) => { %>
                     <div class="row">
-                        <div class="col">
-                            <a class="shorturl" href="https://shorthttp.onrender.com/url/s/<%= item.shortId %>" style="color: #144EE3;" title="copy">
-                                <%= "https://shorthttp.onrender.com/url/s/" + item.shortId %>
-                            </a>
-                            <span  class="copybtn" style="margin:10px; cursor:pointer; color:#144EE3;" title="copy"><i class="fa-regular fa-copy"></i></span>
+                        <div class="outer-col-wrapper">
 
-                        </div>
-                        <div class="col">
-                            <%= item.redirectUrl %>
-                            <div>
-                                   <a href="/url/deleteurl/<%= item._id %>">  <i> <i class="fa-solid fa-trash"></i></a>
+                            <div class="col">
+                                <a class="shorturl" href="https://shorthttp.onrender.com/url/s/<%= item.shortId %>" style="color: #144EE3;" title="copy">
+                                    <%= "https://shorthttp.onrender.com/url/s/" + item.shortId %>
+                                </a>
+                                
+                            </div>
+                            <div class="col">
+                                <%= item.redirectUrl %>
+                            </div>
+                            <div class="del-btn">
+                                <a href="/url/deleteurl/<%= item._id %>">  <i> <i class="fa-solid fa-trash"></i></a>
+                                <span  class="copybtn" style="margin:10px; cursor:pointer; color:#144EE3;" title="copy"><i class="fa-regular fa-copy"></i></span>
                             </div>
                         </div>
                     </div>
-                <% }); %>
+                        <% }); %>
         </div>
 
             <%- include("footer.ejs") %>

@@ -189,7 +189,12 @@ nav {
     min-width: 50%;
     max-width: 50%;
 }
-
+.outer-col-wrapper{
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    
+}
 .col {
     display: flex;
     justify-content: space-evenly;
@@ -202,12 +207,16 @@ nav {
 }
 .col span{
     min-width: fit-content;
+    display: block;
 }
 
 .row ::-webkit-scrollbar {
     display: none;
 }
-
+.del-btn{
+    min-width: 25px;
+    min-height: 25px;
+}
 .footer-wrapper {
     width: 100%;
     text-align: center;
@@ -218,6 +227,8 @@ nav {
     z-index: 2;
     margin-bottom: 0;
 }
+
+
 
 @media (max-width:400px) {
 
