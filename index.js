@@ -2,6 +2,7 @@ const express =require("express");
 const ejs =require("ejs");
 const path = require("path");
 const app =express();
+require("dotenv").config();
 const cookieParser = require('cookie-parser')
 const router =require("./routes/routes");
 const dbConnect= require("./util/dbconfig");
@@ -22,4 +23,4 @@ app.use("/url",router);
 
 app.get("/",(req,res)=>res.render("home.ejs"));
 
-app.listen(PORT,()=>console.log("listening"));
+app.listen(PORT);

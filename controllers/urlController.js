@@ -4,7 +4,6 @@ const URL = require("../models/urlSchema");
 const generateNewShortUrl = async (req, res) => {
     try {
         const {url} = req.body;
-        console.log(req.user)
         if (!url) {
             return res.status(400).json({ error: "URL is required" });
         }
@@ -26,4 +25,24 @@ const generateNewShortUrl = async (req, res) => {
     }
 }
 
-module.exports = { generateNewShortUrl };
+ 
+const deleteUrlById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        if (!id) {
+            return res.status(400).json({ error: "URL ID is required" });
+        }
+        const deletedUrl = await URL.findByIdAndDelete({_id:id});
+
+        if (!deletedUrl) {
+            return res.status(404).json({ error: "URL not found" });
+        }
+        // res.status(200).json({ message: "URL deleted successfully" })
+        return res.redirect("/url/dashboard");
+    } catch (error) {
+        console.error("Error deleting URL:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+module.exports = { generateNewShortUrl ,deleteUrlById };

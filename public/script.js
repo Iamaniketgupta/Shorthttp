@@ -3,6 +3,7 @@ const copyBtn = document.querySelectorAll(".copybtn");
 const copyMsg = document.querySelector(".copiesmsg");
 const logoutBtn = document.querySelector("#logout");
 
+
 copyBtn.forEach((item, index) => item.addEventListener('click', () => {
     navigator.clipboard.writeText(shorturl[index].href);
     copyMsg.style.display = "block";
@@ -11,6 +12,19 @@ copyBtn.forEach((item, index) => item.addEventListener('click', () => {
     }, 4000);
 }));
 
-logoutBtn.addEventListener(()=>{
-    browser.cookies.remove("authId")
-})
+// logout feature
+logoutBtn.addEventListener("click", () => {
+    fetch('/url/logout', { method: "GET" })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/";
+            } else {
+                console.error('Failed to log out');
+            }
+        })
+        .catch(error => {
+            console.error('Error during logout:', error);
+        });
+});
+
+

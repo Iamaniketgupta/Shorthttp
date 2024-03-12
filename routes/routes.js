@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-const { generateNewShortUrl } = require("../controllers/urlController");
+const { generateNewShortUrl, deleteUrlById } = require("../controllers/urlController");
 const URL = require("../models/urlSchema");
-const { handleSignup, handleLogin } = require("../controllers/userController");
+const { handleSignup, handleLogin, handleLogOut } = require("../controllers/userController");
 const { validateLoggedUser, checkAuth } = require("../middlewares/auth");
 const getAllUrls = require("../controllers/getUrlController");
 
@@ -14,8 +14,11 @@ router.get("/signup", (req, res) => {
 router.get("/login", (req, res) => {
     res.render('login.ejs');
 });
+
 router.post("/signup", handleSignup);
 router.post("/login", handleLogin);
+
+router.get("/logout", handleLogOut);
 
 router.get("/dashboard",checkAuth, getAllUrls);
 
@@ -30,6 +33,8 @@ router.get("/s/:shortId", async (req, res) => {
 
     res.redirect(foundUrl.redirectUrl);
 });
+
+router.get("/deleteurl/:id",deleteUrlById);
 
 
 

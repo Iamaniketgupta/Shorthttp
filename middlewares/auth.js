@@ -12,12 +12,18 @@ async function validateLoggedUser(req, res, next) {
 }
 
 async function checkAuth(req, res, next) {
-  const token = req.cookies?.authId;
-  const user = getUser(token);  //util jwt verify
-  req.user = user;
-  next();
+  try {
+    const token = req.cookies?.authId;
+    const user = getUser(token);  //util jwt verify
+    req.user = user;
+  } catch (error) {
+    console.log(error)
+  }
+  finally {
+    next();
+  }
 }
- 
+
 module.exports = {
   validateLoggedUser,
   checkAuth,

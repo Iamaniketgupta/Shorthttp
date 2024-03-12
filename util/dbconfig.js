@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const DB_URL = "mongodb://127.0.0.1:27017/shorturl";
+const DB_URL = process.env.MONGO_URI;
 
 const dbConnect = async () => {
     try {
-        await mongoose.connect(DB_URL);
-        console.log("Connected to MongoDB");
-    } catch (err) {
+        await mongoose.connect(`${DB_URL}/shorthttp`)
+        
+    } catch (err) { 
         console.error("Error connecting to MongoDB:", err);
     }
 };
