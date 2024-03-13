@@ -8,16 +8,8 @@ const handleLogin = async (req, res) => {
 
         if (!(email && password))
             throw new Error("All fields are required");
-
         const userDetails = await user.findOne({ email: email })
-
-        if (!userDetails) {
-            res.redirect('/url/signup');
-            throw new Error("User does not exist");
-
-        }
-        else {
-
+        if (userDetails) {
             const salt = userDetails.salt;
             const hashedPassword = userDetails.password;
 
@@ -31,8 +23,11 @@ const handleLogin = async (req, res) => {
             const token = setUser(userDetails)
             res.cookie("authId", token);
             res.redirect('/url/dashboard');
-
         }
+
+        res.redirect('/url/signup');
+        throw new Error("User does not exist");
+
 
     } catch (err) {
         console.log(err)
@@ -54,11 +49,11 @@ const handleSignup = async (req, res) => {
 
         if (!userDetails) {
             throw new Error("Error while creating user ");
-            
+
         }
         else {
             // res.send(`<script>alert("Signup Successfull. Please login")</script>`)
-            res.redirect('/login');
+            res.redirect('/url/login');
         }
 
     } catch (error) {
